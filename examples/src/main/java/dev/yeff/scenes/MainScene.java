@@ -22,7 +22,7 @@ public class MainScene extends Scene {
     @Override
     public void init(Game game) {
         Log.info(getClass(), "main scene initialized");
-        sprite = ResourceManager.getSprite(getClass(), "assets/character_0000.png");
+        sprite = ResourceManager.getSprite(getClass(), "assets/character_0saferbvqwevq.png");
         music = ResourceManager.getMusicStream(getClass(), "audio/bensound-epic.mp3");
 
         music.loop(true);

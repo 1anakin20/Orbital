@@ -14,7 +14,6 @@ import dev.yeff.orbital.util.Log;
 public class MenuScene extends Scene {
     private Font font;
     private GameObject greeting;
-    private GameObject testLine;
 
     @Override
     public void init(Game game) {

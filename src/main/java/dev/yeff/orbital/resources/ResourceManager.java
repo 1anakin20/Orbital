@@ -2,6 +2,7 @@ package dev.yeff.orbital.resources;
 
 
 import dev.yeff.orbital.audio.AudioManager;
+import dev.yeff.orbital.util.Log;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -39,8 +40,9 @@ public class ResourceManager {
 
         try {
             file = new File(klass.getClassLoader().getResource(path).toURI());
-        } catch (URISyntaxException e) {
-            throw new IllegalStateException(e.toString());
+        } catch (Exception e) {
+            Log.info(ResourceManager.class, "Unable to load given texture, using fallback texture.");
+            file = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\texture.png");
         }
 
         if (file.exists()) {
