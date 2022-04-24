@@ -24,6 +24,9 @@ public class ResourceManager {
     private static final Map<String, AudioClip> audioClips = new HashMap<>();
     private static final Map<String, Music> musicStreams = new HashMap<>();
 
+    private static final File FALLBACK_SPRITE = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\texture.png");
+    private static final File FALLBACK_AUDIO = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\static.mp3");
+    private static final File FALLBACK_FONT = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\grixel_acme_9\\Acme 9 Regular.ttf");
 
     // SPRITES
 
@@ -42,7 +45,7 @@ public class ResourceManager {
             file = new File(klass.getClassLoader().getResource(path).toURI());
         } catch (Exception e) {
             Log.info(ResourceManager.class, "Unable to load given texture, using fallback texture.");
-            file = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\texture.png");
+            file = FALLBACK_SPRITE;
         }
 
         if (file.exists()) {
@@ -103,7 +106,8 @@ public class ResourceManager {
         try {
             file = new File(klass.getClassLoader().getResource(path).toURI());
         } catch (URISyntaxException e) {
-            throw new IllegalStateException(e.toString());
+            Log.info(ResourceManager.class, "Unable to load given font, using fallback font.");
+            file = FALLBACK_FONT;
         }
 
         if (file.exists()) {
@@ -163,8 +167,9 @@ public class ResourceManager {
 
         try {
             file = new File(klass.getClassLoader().getResource(path).toURI());
-        } catch (URISyntaxException e) {
-            throw new IllegalStateException(e.toString());
+        } catch (Exception e) {
+            Log.info(ResourceManager.class, "Unable to load given audio clip, using fallback audio.");
+            file = FALLBACK_AUDIO;
         }
 
         if (file.exists()) {
@@ -224,8 +229,9 @@ public class ResourceManager {
 
         try {
             file = new File(klass.getClassLoader().getResource(path).toURI());
-        } catch (URISyntaxException e) {
-            throw new IllegalStateException(e.toString());
+        } catch (Exception e) {
+            Log.info(ResourceManager.class, "Unable to load given music stream, using fallback audio.");
+            file = FALLBACK_AUDIO;
         }
 
         if (file.exists()) {
