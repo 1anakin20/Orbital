@@ -37,6 +37,7 @@ public class Window {
      */
     public void start() {
         InitAudioDevice();
+        InitPhysics();
         SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 
         // Disables the logs from raylib, so I can implement my own logging system
@@ -85,7 +86,8 @@ public class Window {
         game.getCurrentScene().dispose(game);
         Log.info(Window.class, "Closing window..");
 
-        CloseWindow();
         CloseAudioDevice();
+        ClosePhysics();
+        CloseWindow();
     }
 }
