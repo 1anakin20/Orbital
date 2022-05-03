@@ -11,6 +11,7 @@ import dev.yeff.orbital.graphics.Colors;
 import dev.yeff.orbital.graphics.Shapes;
 import dev.yeff.orbital.math.Vector2f;
 import dev.yeff.orbital.resources.ResourceManager;
+import dev.yeff.orbital.resources.Sprite;
 import dev.yeff.orbital.scenes.Scene;
 import dev.yeff.orbital.tests.mock.MockScene;
 import org.assertj.core.api.WithAssertions;
@@ -34,7 +35,6 @@ public class GameObjectTests implements WithAssertions {
                 .build();
 
         assertThat(object).isNotNull();
-
     }
 
     @DisplayName("create game object with transform component using builder")
@@ -106,11 +106,15 @@ public class GameObjectTests implements WithAssertions {
     @DisplayName("create game object with sprite component using builder")
     @Test
     public void testCreateGameObject_withSprite_usingBuilder() {
+        Sprite sprite = ResourceManager.getSprite(getClass(), "character_0000.png");
+
         GameObject object = new GameObjectBuilder(mockScene, "Test Object")
-                .withSprite(ResourceManager.getSprite(getClass(), "character_0000.png"))
+                .withSprite(sprite)
                 .build();
 
         assertThat(object.hasComponent(SpriteComponent.class)).isTrue();
         assertThat(object.getComponent(SpriteComponent.class).sprite).isNotNull();
+
+        ResourceManager.disposeSprite(sprite);
     }
 }

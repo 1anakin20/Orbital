@@ -22,8 +22,10 @@ public class MainScene extends Scene {
     @Override
     public void init(Game game) {
         Log.info(getClass(), "main scene initialized");
-        sprite = ResourceManager.getSprite(getClass(), "assets/character_0saferbvqwevq.png");
+        sprite = ResourceManager.getSprite(getClass(), "assets/ssvav.png");
         music = ResourceManager.getMusicStream(getClass(), "audio/aswrvjer.mp3");
+
+        assert sprite != null;
 
         music.loop(true);
         AudioManager.playMusic(music);

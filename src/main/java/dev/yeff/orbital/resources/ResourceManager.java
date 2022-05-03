@@ -24,12 +24,24 @@ public class ResourceManager {
     private static final Map<String, AudioClip> audioClips = new HashMap<>();
     private static final Map<String, Music> musicStreams = new HashMap<>();
 
-    private static final File FALLBACK_SPRITE = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\texture.png");
+    private static final File FALLBACK_SPRITE = getResource("/texture.png");
     private static final File FALLBACK_AUDIO = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\static.mp3");
     private static final File FALLBACK_FONT = new File("C:\\Users\\aditc\\dev\\Orbital\\src\\main\\resources\\grixel_acme_9\\Acme 9 Regular.ttf");
 
-    // SPRITES
 
+    public static File getResource(String path) {
+        File file;
+
+        try {
+            file = new File(ResourceManager.class.getClassLoader().getResource(path).getPath());
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+
+        return file;
+    }
+
+    // SPRITES
 
     /**
      * Gets a sprite if stored in the resource manager, otherwise adds it to the resource manager and returns it.
@@ -43,8 +55,11 @@ public class ResourceManager {
 
         try {
             file = new File(klass.getClassLoader().getResource(path).toURI());
+
+            Log.info(ResourceManager.class, file.getAbsolutePath());
         } catch (Exception e) {
             Log.info(ResourceManager.class, "Unable to load given texture, using fallback texture.");
+
             file = FALLBACK_SPRITE;
         }
 
